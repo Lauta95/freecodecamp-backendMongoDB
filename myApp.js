@@ -50,7 +50,8 @@ const findPeopleByName = (personName, done) => {
 };
 
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods: {$all: [food]}}, (err, data) => {
+  // Person es el modelo, .findeOne es el método
+  Person.findOne({ favoriteFoods: { $all: [food] } }, (err, data) => {
     // va a buscar en el campo favoriteFoods de todos los records y va a buscar entre todas las comidas que le pasas [food]
     if (err) {
       console.log(err);
@@ -62,7 +63,10 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+    if(err) return console.log(err);
+    done(null, data);
+  });
 };
 
 const findEditThenSave = (personId, done) => {
