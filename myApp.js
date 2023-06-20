@@ -64,21 +64,31 @@ const findOneByFood = (food, done) => {
 
 const findPersonById = (personId, done) => {
   Person.findById(personId, (err, data) => {
-    if(err) return console.log(err);
+    if (err) return console.log(err);
     done(null, data);
   });
 };
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+    if (err) return console.log(err);
+    data.favoriteFoods.push(foodToAdd);
+    data.save((err, actualizado) => {
+      if (err) return console.log(err);
+      done(null, actualizado);
+    })
+  })
 };
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  // -findOneAndUpdate uses ( conditions , update , options , callback ) as arguments.
+  //  -You should return the updated document. To do that, you need to pass the options document { new: true } as the 3rd argument
+  Person.findOneAndUpdate({ name: personName }, { age: ageToSet }, { new: true }, (err, data) => {
+    if(err) return console.log(err);
+    done(null, data)
+  })
 };
 
 const removeById = (personId, done) => {
