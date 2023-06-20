@@ -40,11 +40,25 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({ name: personName }, (err, personFound) => {
+    if (err) {
+      console.log(err);
+    } else {
+      done(null, personFound);
+    }
+  })
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods: {$all: [food]}}, (err, data) => {
+    // va a buscar en el campo favoriteFoods de todos los records y va a buscar entre todas las comidas que le pasas [food]
+    if (err) {
+      console.log(err);
+    } else {
+      done(null, data);
+      // el null es el error, que al no haber error debido al uso del condicional, se le pasa un null
+    }
+  })
 };
 
 const findPersonById = (personId, done) => {
