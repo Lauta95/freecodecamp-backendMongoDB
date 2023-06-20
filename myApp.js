@@ -26,15 +26,7 @@ const createAndSavePerson = (done) => {
 };
 // data: cuando es exitosamente escrito en la db retorna esta data, a la cual podemos fácilmente ingresar
 
-  let arrayOfPeople = [
-    {
-      name: 'Lautaro',
-      age: 28,
-      favoriteFoods: ['Asado', 'Papas Fritas']
-    },
-    { name: 'Carina', age: 50, favoriteFoods: ['Pizza', 'Frutas'] },
-    { name: 'German', age: 53, favoriteFoods: ['Paella', 'Pollo', 'Pochoclos'] }
-  ];
+
 const createManyPeople = (arrayOfPeople, done) => {
 
   Person.create(arrayOfPeople, (err, createdPeople) => {
