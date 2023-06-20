@@ -24,9 +24,27 @@ const createAndSavePerson = (done) => {
     }
   })
 };
+// data: cuando es exitosamente escrito en la db retorna esta data, a la cual podemos fácilmente ingresar
 
+  let arrayOfPeople = [
+    {
+      name: 'Lautaro',
+      age: 28,
+      favoriteFoods: ['Asado', 'Papas Fritas']
+    },
+    { name: 'Carina', age: 50, favoriteFoods: ['Pizza', 'Frutas'] },
+    { name: 'German', age: 53, favoriteFoods: ['Paella', 'Pollo', 'Pochoclos'] }
+  ];
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+
+  Person.create(arrayOfPeople, (err, createdPeople) => {
+    // crea estos modelos y los guarda en la db. Luego podés correr esta función que podes mostrar un error y la gente creada si es que fueron creadas
+    if (err) {
+      console.log(err);
+    } else {
+      done(null, createdPeople)
+    }
+  });
 };
 
 const findPeopleByName = (personName, done) => {
