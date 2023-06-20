@@ -86,22 +86,24 @@ const findAndUpdate = (personName, done) => {
   // -findOneAndUpdate uses ( conditions , update , options , callback ) as arguments.
   //  -You should return the updated document. To do that, you need to pass the options document { new: true } as the 3rd argument
   Person.findOneAndUpdate({ name: personName }, { age: ageToSet }, { new: true }, (err, data) => {
-    if(err) return console.log(err);
+    if (err) return console.log(err);
     done(null, data)
   })
 };
 
 const removeById = (personId, done) => {
-  Person.findByIdAndRemove(personId, (err, data) =>{
-    if(err) return console.log(err);
+  Person.findByIdAndRemove(personId, (err, data) => {
+    if (err) return console.log(err);
     done(null, data);
   })
 };
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({ name: nameToRemove }, (err, data) => {
+    if(err) return console.log(err);
+    done(null, data);
+  })
 };
 
 const queryChain = (done) => {
